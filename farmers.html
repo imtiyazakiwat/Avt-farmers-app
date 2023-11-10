@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            background-color: #8ba9f6;
+            color: white;
+            height: 10vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        img {
+            height: 4vh;
+            width: auto;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .heading {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            white-space: nowrap; /* Prevent text wrapping */
+            overflow: hidden; /* Hide overflow content */
+            text-overflow: ellipsis; /* Display ellipsis for overflow text */
+        }
+
+        th {
+            background-color: #8ba9f6;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            /* Initially hidden */
+            width: 300px;
+            height: 100%;
+            background-color: #6f4695;
+            color: white;
+            transition: left 0.3s ease;
+            z-index: 2;
+        }
+
+        .navbar a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            background-color: #4d2e5e;
+        }
+
+        .menu-icon {
+            display: none;
+            /* Hide by default on larger screens */
+            cursor: pointer;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="back" onclick="goBack()">
+            <img src="arrow-left-long-solid.svg" alt="">
+        </div>
+        <h1>Farmers</h1>
+        <div class="menu" onclick="toggleNavbar()">
+            <img src="bars-solid.svg" alt="">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="heading">
+            <h1>Farmers List</h1>
+        </div>
+        <table>
+            <tr>
+                <th>Farmer name</th>
+                <th>Farmer code</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>Sikandar Mujawar</td>
+                <td>KODAG181</td>
+                <td><img src="ellipsis-vertical-solid.svg" alt=""></td>
+            </tr>
+            <tr>
+                <td>Sikandar Mujawar</td>
+                <td>KODAG181</td>
+                <td><img src="ellipsis-vertical-solid.svg" alt=""></td>
+            </tr>
+            <tr>
+                <td>Sikandar Mujawar</td>
+                <td>KODAG181</td>
+                <td><img src="ellipsis-vertical-solid.svg" alt=""></td>
+            </tr>
+            <tr>
+                <td>Sikandar Mujawar</td>
+                <td>KODAG181</td>
+                <td><img src="ellipsis-vertical-solid.svg" alt=""></td>
+            </tr>
+            <tr>
+                <td>Sikandar Mujawar</td>
+                <td>KODAG181</td>
+                <td><img src="ellipsis-vertical-solid.svg" alt=""></td>
+            </tr>
+        </table>
+    </div>
+    <div class="navbar" id="navbar">
+        <a href="index.html">Home</a>
+        <a href="farmer-documents.html">Farmer Documents</a>
+        <a href="farmers.html">Farmers</a>
+        <a href="view-documents.html">View Documents</a>
+        <a href="farmer-profile.html">View Profile</a>
+
+    </div>
+
+    <script>
+        var navbar = document.getElementById("navbar");
+
+        function toggleNavbar() {
+            if (navbar.style.left === "-300px" || navbar.style.left === "") {
+                navbar.style.left = "0px";
+            } else {
+                navbar.style.left = "-300px";
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>
