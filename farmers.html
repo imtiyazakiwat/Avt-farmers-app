@@ -56,9 +56,12 @@
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
-            white-space: nowrap; /* Prevent text wrapping */
-            overflow: hidden; /* Hide overflow content */
-            text-overflow: ellipsis; /* Display ellipsis for overflow text */
+            white-space: nowrap;
+            /* Prevent text wrapping */
+            overflow: hidden;
+            /* Hide overflow content */
+            text-overflow: ellipsis;
+            /* Display ellipsis for overflow text */
         }
 
         th {
@@ -97,14 +100,68 @@
 
         .menu-icon {
             display: none;
-            /* Hide by default on larger screens */
             cursor: pointer;
             padding: 20px;
         }
+
+        .Add-farmers button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .Add-farmers button:hover {
+            background-color: #45a049;
+        }
+
+
+        #input-box {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        #input-box input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #input-box button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #input-box button:hover {
+            background-color: #45a049;
+        }
+
+
+
     </style>
 </head>
 
 <body>
+    <div class="navbar" id="navbar">
+        <a href="index.html">Home</a>
+        <a href="farmer-documents.html">Farmer Documents</a>
+        <a href="farmers.html">Farmers</a>
+        <a href="view-documents.html">View Documents</a>
+        <a href="farmer-profile.html">View Profile</a>
+
+    </div>
     <div class="header">
         <div class="back" onclick="goBack()">
             <img src="arrow-left-long-solid.svg" alt="">
@@ -119,48 +176,31 @@
         <div class="heading">
             <h1>Farmers List</h1>
         </div>
-        <table>
+        <table id="farmers-list">
             <tr>
                 <th>Farmer name</th>
                 <th>Farmer code</th>
                 <th></th>
             </tr>
             <tr>
-                <td>Sikandar Mujawar</td>
-                <td>KODAG181</td>
+                <td id="farmer-name">Sikandar Mujawar</td>
+                <td id="farmer-code">KODAG181</td>
                 <td><img src="ellipsis-vertical-solid.svg" alt=""></td>
             </tr>
-            <tr>
-                <td>Sikandar Mujawar</td>
-                <td>KODAG181</td>
-                <td><img src="ellipsis-vertical-solid.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td>Sikandar Mujawar</td>
-                <td>KODAG181</td>
-                <td><img src="ellipsis-vertical-solid.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td>Sikandar Mujawar</td>
-                <td>KODAG181</td>
-                <td><img src="ellipsis-vertical-solid.svg" alt=""></td>
-            </tr>
-            <tr>
-                <td>Sikandar Mujawar</td>
-                <td>KODAG181</td>
-                <td><img src="ellipsis-vertical-solid.svg" alt=""></td>
-            </tr>
+
         </table>
-    </div>
-    <div class="navbar" id="navbar">
-        <a href="index.html">Home</a>
-        <a href="farmer-documents.html">Farmer Documents</a>
-        <a href="farmers.html">Farmers</a>
-        <a href="view-documents.html">View Documents</a>
-        <a href="farmer-profile.html">View Profile</a>
-
+        <div class="Add-farmers">
+            <button onclick="showInputBox()">
+                Add Farmers
+            </button>
+        </div>
     </div>
 
+    <div id="input-box" style="display: none;">
+        <input type="text" placeholder="Enter Farmer Name" id="input-farmer-name">
+        <input type="text" placeholder="Enter Farmer Code" id="input-farmer-code">
+        <button onclick="addFarmersFromInput()">Submit</button>
+    </div>
     <script>
         var navbar = document.getElementById("navbar");
 
@@ -175,6 +215,65 @@
         function goBack() {
             window.history.back();
         }
+        var farmerslist = document.getElementById('farmers-list')
+
+        function showInputBox() {
+            var inputBox = document.getElementById('input-box');
+            inputBox.style.display = 'flex';
+        }
+
+        function addFarmersFromInput() {
+            var farmerNameInput = document.getElementById('input-farmer-name');
+            var farmerCodeInput = document.getElementById('input-farmer-code');
+
+            // Validate input
+            if (farmerNameInput.value.trim() === '' || farmerCodeInput.value.trim() === '') {
+                alert('Please enter both Farmer Name and Farmer Code.');
+                return;
+            }
+
+            // Create a new row
+            var farmersList = document.getElementById('farmers-list');
+            var newRow = document.createElement('tr');
+
+            // Create the first td with id "farmer-name"
+            var farmerNameCell = document.createElement('td');
+            farmerNameCell.id = 'farmer-name';
+            farmerNameCell.textContent = farmerNameInput.value;
+
+            // Create the second td with id "farmer-code"
+            var farmerCodeCell = document.createElement('td');
+            farmerCodeCell.id = 'farmer-code';
+            farmerCodeCell.textContent = farmerCodeInput.value;
+
+            // Create the third td with an image
+            var ellipsisCell = document.createElement('td');
+            ellipsisCell.innerHTML = '<img src="ellipsis-vertical-solid.svg" alt="">';
+
+            // Append the td elements to the row
+            newRow.appendChild(farmerNameCell);
+            newRow.appendChild(farmerCodeCell);
+            newRow.appendChild(ellipsisCell);
+
+            // Append the new row to the table
+            farmersList.appendChild(newRow);
+
+            // Clear input values
+            farmerNameInput.value = '';
+            farmerCodeInput.value = '';
+
+            // Hide the input box
+            var inputBox = document.getElementById('input-box');
+            inputBox.style.display = 'none';
+        }
+
+
+
+    
+
+
+
+        
     </script>
 </body>
 
